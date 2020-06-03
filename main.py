@@ -1,3 +1,9 @@
+# You are given two kangaroos on a number line ready to jump in the positive direction.
+# The first kangaroo starts at location x1 and moves at a rate of v1 meters per jump.
+# The second kangaroo starts at location x2 and moves at a rate of v2 meters per jump.
+# You have to figure out a way to get both kangaroos at the same location at the same time as part of the show.
+
+
 def kangaroo(x1, v1, x2, v2):
     if (x1 < x2 and v1 > v2) or (x1 > x2 and v1 < v2):
         y = (float(x2) - float(x1)) / (float(v1) - float(v2))
@@ -6,6 +12,11 @@ def kangaroo(x1, v1, x2, v2):
     return False
 
 
+# Lily has a chocolate bar that she wants to share with Ron for his birthday.
+# Each of the squares has an integer on it.
+# She decides to share a contiguous segment of the bar selected such that the length of the segment
+# matches Ron's birth month and the sum of the integers on the squares is equal to his birth day.
+# You must determine how many ways she can divide the chocolate.
 def birthday(s, d, m):
     count = 0
 
@@ -40,24 +51,25 @@ def dayOfProgrammer(year):
 def pageCount(n, p):
     count = 0
 
-    if (p > n / 2):
+    if p > n / 2:
         page = n
-        while (page != p):
-            if (p % 2 == 0 and page == p+1):
+        while page != p:
+            if p % 2 == 0 and page == p+1:
                 break
-            if (page % 2 == 0):
+            if page % 2 == 0:
                 count += 1
             page -= 1
     else:
         page = 1
-        while (page != p):
-            if (p % 2 != 0 and page == p-1):
+        while page != p:
+            if p % 2 != 0 and page == p-1:
                 break
-            if (page % 2 != 0):
+            if page % 2 != 0:
                 count += 1
             page += 1
 
     return count
 
 
-print(kangaroo(0, 2, 5, 3))
+# print(kangaroo(0, 2, 5, 3))
+# print(birthday([1, 2, 1, 3, 2], 3, 2))

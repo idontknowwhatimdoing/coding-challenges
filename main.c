@@ -123,6 +123,11 @@ void gradingStudents(int grades[], unsigned int size) {
     }
 }
 
+// Maria plays college basketball and wants to go pro. Each season she maintains a record
+// of her play. She tabulates the number of times she breaks her season record for most
+// points and least points in a game.
+// Given Maria's scores for a season, find and print the number of times she breaks her
+// records for most and least points scored during the season.
 int* breakingRecords(int scores[], unsigned int size) {
     int* records_count = malloc(sizeof(int) * 2);
     records_count[0] = 0;
@@ -131,7 +136,7 @@ int* breakingRecords(int scores[], unsigned int size) {
     int most_points = scores[0];
     int least_points = scores[0];
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 1; i < size; i++) {
         if (scores[i] > most_points) {
             most_points = scores[i];
             records_count[0]++;
@@ -142,6 +147,18 @@ int* breakingRecords(int scores[], unsigned int size) {
     }
 
     return records_count;
+}
+
+int divisibleSumPairs(int a[], unsigned int size, int k) {
+    int count = 0;
+
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if ((a[i] + a[j]) % k == 0) count++;
+        }
+    }
+
+    return count;
 }
 
 int sockMerchant(int a[], unsigned int size, int n) {
@@ -232,18 +249,6 @@ int countingValleys(int n, char* s, unsigned int size) {
     }
 
     return countValleys;
-}
-
-int divisibleSumPairs(int a[], unsigned int size, int k) {
-    int count = 0;
-
-    for (int i = 0; i < size - 1; i++) {
-        for (int j = i + 1; j < size; j++) {
-            if ((a[i] + a[j]) % k == 0) count++;
-        }
-    }
-
-    return count;
 }
 
 // Given an array of integers, find and print the maximum number of integers you can

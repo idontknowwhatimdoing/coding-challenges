@@ -1,7 +1,8 @@
 // Given five positive integers, find the minimum and maximum values that can be
 // calculated summing exactly four of the five integers
-fn min_max_sum(a: Vec<i32>) {
-    let mut min = 0, max = 0;
+fn min_max_sum(a: &mut Vec<i32>) {
+	let mut min = 0;
+	let mut max = 0;
 
     a.sort_unstable();
 
@@ -45,14 +46,81 @@ fn bon_appetit(bill: Vec<i32>, k: i32, b: i32) {
 	else { println!("{}", (total_sum / 2) - (sum_k / 2)); }
 }
 
+// Sam's house has an apple tree and an orange tree.
+// His house starts at point s, and ends at point t.
+// The apple tree is to the left of his house, and the orange tree is to its right.
+// The apple tree is at point a, and the orange tree is at point b.
 // When a fruit falls from its tree, it lands d units of distance from its tree of origin along the x-axis.
 // A negative value of d means the fruit fell d units to the tree's left
 // and a positive value of means it falls units to the tree's right.
 // Given the value of d for m apples and n oranges
 // determine how many apples and oranges will be in the inclusive range [s, t].
-fn apples_oranges(apples: Vec<i32>, oranges: Vec<i32>, s: i32, t: i32, a: i32, b: i32) {}
+fn apples_oranges(apples: Vec<i32>, oranges: Vec<i32>, s: i32, t: i32, a: i32, b: i32) {
+	let mut count_apples = 0;
+	let mut count_oranges = 0;
+	
+	for d in apples {
+		if d + a >= s && d + a <= t { count_apples += 1; }
+	}
+
+	for d in oranges {
+		if d + b <= t && d + b >= s { count_oranges += 1; }
+	}
+
+	println!("apples : {}\noranges : {}", count_apples, count_oranges);
+}
+
+// You will be given two arrays of integers and asked to determine
+// all integers that satisfy the following two conditions:
+// - The elements of the first array are all factors of the integer being considered
+// - The integer being considered is a factor of all elements of the second array
+// You must determine how many such numbers exist.
+fn get_total_x(mut a: Vec<i32>, mut b: Vec<i32>) -> u16 {
+	let mut count = 0;
+
+	a.sort_unstable();
+	b.sort_unstable();
+
+	let mut x = a[a.len()-1];
+
+	while x <= b[0] {
+		let mut ok = false;
+
+		for i in &a {
+			if x % *i == 0 {
+				ok = true;
+			} else {
+				ok = false;
+				break;
+			}
+		}
+		if ok {
+			for i in &b {
+				if *i % x == 0 {
+					ok = true;
+				} else {
+					ok = false;
+					break;
+				}
+			}
+		}
+
+		if ok { count += 1; }
+		x += 1;
+	}
+
+	count
+}
 
 fn main() {
-	let arg = "07:05:45PM";
-	println!("{} -> {}", arg, time_conversion(arg));
+	// let arg = "07:05:45PM";
+	// println!("{} -> {}", arg, time_conversion(arg));
+
+	// let apples = vec![-2, 2, 1];
+	// let oranges = vec![5, -6];
+	// apples_oranges(apples, oranges, 7, 11, 5, 15);
+
+	// let mut a = vec![2, 4];
+	// let mut b = vec![16, 32, 96];
+	// println!("{}", get_total_x(a, b));
 }
