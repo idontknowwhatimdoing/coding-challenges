@@ -229,7 +229,6 @@ unsigned int sockMerchant(int a[], unsigned int size) {
 
     unsigned int count = 0, freq[size];
     for (int i = 0; i < size; i++) freq[i] = 0;
-
     for (int i = 0; i < size; i++) freq[a[i]]++;
 
     for (int i = 0; i < size; i++) count += freq[i] / 2;
@@ -281,6 +280,11 @@ int countingValleys(char* s, unsigned int size) {
     return count;
 }
 
+// Two cats and a mouse are at various positions on a line.
+// You will be given their starting positions.
+// Your task is to determine which cat will reach the mouse first, assuming the mouse
+// doesn't move and the cats travel at equal speed. If the cats arrive at the same time,
+// the mouse will be allowed to move and it will escape while they fight.
 char* catAndMouse(int x, int y, int z) {
     if (abs(x - z) == abs(y - z))
         return "Mouse C";
@@ -296,59 +300,43 @@ char* catAndMouse(int x, int y, int z) {
 // For example, if your array is, a = [1, 1, 2, 2, 4, 4, 5, 5, 5]
 // you can create two subarrays meeting the criterion : [1, 1, 2, 2] and [4, 4, 5, 5, 5].
 // The maximum length subarray has 5 elements.
-int pickingNumbers(int a[], int size) {
-    int max = 0;
+unsigned int pickingNumbers(int a[], unsigned int size) {
+    unsigned int max = 0;
 
-    for (int i = 0; i < size; i++) {
-        int temp[size];
-        temp[0] = a[i];
-        int nb_elem = 1;
+    // for (int i = 0; i < size; i++) {
+    //     int temp[size];
+    //     temp[0] = a[i];
+    //     int nb_elem = 1;
 
-        for (int j = 0; j < size; j++) {
-            if (i == j) continue;
+    //     for (int j = 0; j < size; j++) {
+    //         if (i == j) continue;
 
-            bool ok = true;
+    //         bool ok = true;
 
-            for (int k = 0; k < nb_elem; k++) {
-                if (abs(a[j] - temp[k]) > 1) {
-                    ok = false;
-                    break;
-                }
-            }
+    //         for (int k = 0; k < nb_elem; k++) {
+    //             if (abs(a[j] - temp[k]) > 1) {
+    //                 ok = false;
+    //                 break;
+    //             }
+    //         }
 
-            if (ok) {
-                temp[nb_elem] = a[j];
-                nb_elem++;
-            }
-        }
+    //         if (ok) {
+    //             temp[nb_elem] = a[j];
+    //             nb_elem++;
+    //         }
+    //     }
 
-        if (nb_elem > max) max = nb_elem;
-    }
+    //     if (nb_elem > max) max = nb_elem;
+    // }
 
-    return max;
-}
+    // O(n) solution :
 
-int picking_numbers_opti(unsigned int a[], unsigned int size) {
-    int count, prev = -1, max = 0;
+    unsigned int freq[size];
+    for (int i = 0; i < size; i++) freq[i] = 0;
+    for (int i = 0; i < size; i++) freq[a[i]]++;
 
-    // sort(a);
-
-    for (int i = 0; i < size - 1; i++) {
-        if (prev == a[i]) continue;
-
-        count = 1;
-
-        for (int j = i + 1; j < size; j++) {
-            if (a[j] - a[i] <= 1)
-                count++;
-            else
-                break;
-        }
-
-        if (count > max) max = count;
-
-        prev = a[i];
-    }
+    for (int i = 0; i < size - 1; i++)
+        if (freq[i] + freq[i + 1] > max) max = freq[i] + freq[i + 1];
 
     return max;
 }
@@ -396,6 +384,9 @@ int main() {
     // display(test, 4);
 
     // printf("%d\n", countingValleys("UDDDUDUU", 8));
+
+    // int test[6] = {4, 6, 5, 3, 3, 1};
+    // printf("%d\n", pickingNumbers(test, 6));
 
     return 0;
 }
