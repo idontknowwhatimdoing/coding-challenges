@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 // Given five positive integers, find the minimum and maximum values that can be
 // calculated summing exactly four of the five integers
 fn min_max_sum(a: &mut Vec<i32>) {
@@ -112,6 +114,24 @@ fn get_total_x(mut a: Vec<i32>, mut b: Vec<i32>) -> u16 {
 	count
 }
 
+// Given an array of integers, return indices of the two numbers such that they add up to
+// a specific target.
+fn two_sum(a: Vec<i32>, target: i32) -> Option<(usize, usize)> {
+	let mut map = HashMap::new();
+
+	for i in 0..a.len() {
+		let compl = target - a[i];
+
+		if map.contains_key(&compl) {
+			return Some((*map.get(&compl).unwrap(), i));
+		}
+
+		map.insert(a[i], i);
+	}
+
+	None
+}
+
 fn main() {
 	// let arg = "07:05:45PM";
 	// println!("{} -> {}", arg, time_conversion(arg));
@@ -123,4 +143,7 @@ fn main() {
 	// let mut a = vec![2, 4];
 	// let mut b = vec![16, 32, 96];
 	// println!("{}", get_total_x(a, b));
+
+	// let a = vec![2, 7, 11, 15];
+	// println!("{:?}", two_sum(a, 9).unwrap());
 }

@@ -49,7 +49,7 @@ int* compareTriplets(int a[], int b[], unsigned int size) {
 
 // Given a square matrix, calculate the absolute difference between the sums of its
 // diagonals.
-int diagonalDifference(int** a, unsigned int size) {
+unsigned int diagonalDifference(int** a, unsigned int size) {
     int sum_diag1 = 0, sum_diag2 = 0;
 
     int j = size - 1;
@@ -114,7 +114,7 @@ unsigned int birthday_cake_candles(unsigned int a[], unsigned int size) {
 // to the next multiple of 5.
 // If the value of garde is less than 38, no rounding occurs as the result will still be a
 // failing grade.
-void gradingStudents(int grades[], unsigned int size) {
+void gradingStudents(unsigned int grades[], unsigned int size) {
     for (int i = 0; i < size; i++) {
         if (grades[i] < 38)
             continue;
@@ -149,17 +149,9 @@ int* breakingRecords(int scores[], unsigned int size) {
     return records_count;
 }
 
-int divisibleSumPairs(int a[], unsigned int size, int k) {
-    int count = 0;
-
-    for (int i = 0; i < size - 1; i++) {
-        for (int j = i + 1; j < size; j++) {
-            if ((a[i] + a[j]) % k == 0) count++;
-        }
-    }
-
-    return count;
-}
+// You are given an array a of integers and a positive integer k.
+// Find the number of (i, j) pairs where i < j and a[i] + a[j] is divisible by k.
+unsigned int divisibleSumPairs(unsigned int a[], unsigned int size, unsigned int k) {}
 
 int sockMerchant(int a[], unsigned int size, int n) {
     int totalPairs = 0, count = 1, nbElem = 0, paired = 0, pass = 0;
@@ -312,21 +304,6 @@ int picking_numbers_opti(unsigned int a[], unsigned int size) {
     }
 
     return max;
-}
-
-// Given an array of integers, return indices of the two numbers such that they add up to
-// a specific target. You may assume that each input would have exactly one solution, and
-// you may not use the same element twice.
-void two_sum(int arr[], unsigned int size, int target) {
-    for (int i = 0; i < size - 1; i++) {
-        for (int j = i + 1; j < size; j++) {
-            if (arr[i] + arr[j] == target) {
-                printf("soltion : %d & %d\n", i, j);
-                return;
-            }
-        }
-    }
-    printf("no solution found ...");
 }
 
 // Given a 32 bit signed integer, reverse its digits.
