@@ -2,3 +2,5 @@ main
 a.out
 a.exe
 Cargo.toml
+Cargo.lock
+target

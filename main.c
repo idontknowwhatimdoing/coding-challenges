@@ -151,58 +151,25 @@ int* breakingRecords(int scores[], unsigned int size) {
 
 // You are given an array a of integers and a positive integer k.
 // Find the number of (i, j) pairs where i < j and a[i] + a[j] is divisible by k.
-unsigned int divisibleSumPairs(unsigned int a[], unsigned int size, unsigned int k) {}
-
-int sockMerchant(int a[], unsigned int size, int n) {
-    int totalPairs = 0, count = 1, nbElem = 0, paired = 0, pass = 0;
-    int colorsPaired[1000];
+unsigned int divisibleSumPairs(unsigned int a[], unsigned int size, unsigned int k) {
+    unsigned int count = 0;
 
     for (int i = 0; i < size - 1; i++) {
-        // skip the indices of the colors already paired
-        for (int k = 0; k < nbElem; k++) {
-            if (colorsPaired[k] == a[i]) {
-                pass = 1;
-                break;
-            } else
-                pass = 0;
-        }
-
-        if (pass) continue;
-
         for (int j = i + 1; j < size; j++) {
-            if (a[i] == a[j]) {
-                count++;
-                paired = 1;
-            }
+            if ((a[i] + a[j]) % k == 0) count++;
         }
-
-        if (paired) {
-            colorsPaired[nbElem] = a[i];
-            nbElem++;
-        }
-
-        if (count % 2 == 0)
-            totalPairs += count / 2;
-        else
-            totalPairs += (count - 1) / 2;
-
-        count = 1;
-        paired = 0;
-        pass = 0;
     }
 
-    return totalPairs;
+    return count;
 }
 
-char* catAndMouse(int x, int y, int z) {
-    if (abs(x - z) == abs(y - z))
-        return "Mouse C";
-    else if (abs(x - z) < abs(y - z))
-        return "Cat A";
-    else
-        return "Cat B";
-}
-
+// You have been asked to help study the population of birds migrating across the
+// continent. Each type of bird you are interested in will be identified by an integer
+// value. Each time a particular kind of bird is spotted, its id number will be added to
+// your array of sightings. You would like to be able to find out which type of bird is
+// most common given a list of sightings. Your task is to print the type number of that
+// bird and if two or more types of birds are equally common, choose the type with the
+// smallest ID number.
 int migratoryBirds(int arr[], unsigned int size) {
     int freq[6] = {0};
     int max = 1;
@@ -215,32 +182,112 @@ int migratoryBirds(int arr[], unsigned int size) {
     return max;
 }
 
-int countingValleys(int n, char* s, unsigned int size) {
-    int countValleys = 0, seaLevel = 0;
+// John works at a clothing store. He has a large pile of socks that he must pair by color
+// for sale. Given an array of integers representing the color of each sock, determine how
+// many pairs of socks with matching colors there are.
+unsigned int sockMerchant(int a[], unsigned int size) {
+    // int totalPairs = 0, count = 1, nbElem = 0, paired = 0, pass = 0;
+    // int colorsPaired[1000];
+
+    // for (int i = 0; i < size - 1; i++) {
+    //     // skip the indices of the colors already paired
+    //     for (int k = 0; k < nbElem; k++) {
+    //         if (colorsPaired[k] == a[i]) {
+    //             pass = 1;
+    //             break;
+    //         } else
+    //             pass = 0;
+    //     }
+
+    //     if (pass) continue;
+
+    //     for (int j = i + 1; j < size; j++) {
+    //         if (a[i] == a[j]) {
+    //             count++;
+    //             paired = 1;
+    //         }
+    //     }
+
+    //     if (paired) {
+    //         colorsPaired[nbElem] = a[i];
+    //         nbElem++;
+    //     }
+
+    //     if (count % 2 == 0)
+    //         totalPairs += count / 2;
+    //     else
+    //         totalPairs += (count - 1) / 2;
+
+    //     count = 1;
+    //     paired = 0;
+    //     pass = 0;
+    // }
+
+    // return totalPairs;
+
+    // O(n) solution :
+
+    unsigned int count = 0, freq[size];
+    for (int i = 0; i < size; i++) freq[i] = 0;
+
+    for (int i = 0; i < size; i++) freq[a[i]]++;
+
+    for (int i = 0; i < size; i++) count += freq[i] / 2;
+
+    return count;
+}
+
+// Gary is an avid hiker.
+// He tracks his hikes meticulously, paying close attention to small details like
+// topography. During his last hike he took exactly steps. For every step he took, he
+// noted if it was an uphill U or a downhill D step. Gary's hikes start and end at sea
+// level and each step up or down represents a 1 unit change in altitude.
+// A valley is a sequence of consecutive steps below sea level,
+// starting with a step down from sea level and ending with a step up to sea level.
+// Given Gary's sequence of up and down steps during his last hike, find the
+// number of valleys he walked through.
+int countingValleys(char* s, unsigned int size) {
+    int count = 0, sea_level = 0;
+
+    // for (int i = 0; i < size; i++) {
+    //     if (sea_level == 0 && s[i] == 'D') {
+    //         sea_level--;
+    //         int j = i + 1;
+    //         for (j; j < size; j++) {
+    //             if (s[j] == 'U')
+    //                 sea_level++;
+    //             else
+    //                 sea_level--;
+
+    //             if (sea_level == 0) {
+    //                 count++;
+    //                 break;
+    //             }
+    //         }
+    //         i = j;
+    //     } else if (s[i] == 'U')
+    //         sea_level++;
+    //     else
+    //         sea_level--;
+    // }
+
+    // O(n) solution :
 
     for (int i = 0; i < size; i++) {
-        if (seaLevel == 0 && s[i] == 'D') {
-            seaLevel--;
-            int j = i + 1;
-            for (j; j < size; j++) {
-                if (s[j] == 'U')
-                    seaLevel++;
-                else
-                    seaLevel--;
-
-                if (seaLevel == 0) {
-                    countValleys++;
-                    break;
-                }
-            }
-            i = j;
-        } else if (s[i] == 'U')
-            seaLevel++;
-        else
-            seaLevel--;
+        if (s[i] == 'U' && sea_level == -1) count++;
+        sea_level = (s[i] == 'U') ? sea_level + 1 : sea_level - 1;
     }
 
-    return countValleys;
+    return count;
+}
+
+char* catAndMouse(int x, int y, int z) {
+    if (abs(x - z) == abs(y - z))
+        return "Mouse C";
+    else if (abs(x - z) < abs(y - z))
+        return "Cat A";
+    else
+        return "Cat B";
 }
 
 // Given an array of integers, find and print the maximum number of integers you can
@@ -344,9 +391,11 @@ int main() {
 
     // staircase(6);
 
-    int test[4] = {73, 67, 38, 33};
-    gradingStudents(test, 4);
-    display(test, 4);
+    // int test[4] = {73, 67, 38, 33};
+    // gradingStudents(test, 4);
+    // display(test, 4);
+
+    // printf("%d\n", countingValleys("UDDDUDUU", 8));
 
     return 0;
 }

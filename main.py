@@ -31,6 +31,8 @@ def birthday(s, d, m):
     return count
 
 
+# Given a year y, find the date of the 256th day of that year
+# according to the official Russian calendar during that year.
 def dayOfProgrammer(year):
     if (year < 1918):  # Julian
         if (year % 4 == 0):
@@ -48,6 +50,11 @@ def dayOfProgrammer(year):
         return "26.09.1918"
 
 
+# Brie’s Drawing teacher asks her class to open their books to a page number.
+# Brie can either start turning pages from the front of the book or from the back of the book.
+# She always turns pages one at a time.
+# When she opens the book, page is always on the right side
+# Given n and p find the minimum number of pages Brie must turn in order to arrive at page p.
 def pageCount(n, p):
     count = 0
 
