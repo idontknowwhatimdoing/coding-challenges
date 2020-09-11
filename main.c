@@ -366,7 +366,7 @@ int formingMagicSquare(unsigned int rows, unsigned int cols, unsigned int** s) {
 
 void display(int a[], unsigned int size) {
     for (int i = 0; i < size; i++) {
-        printf("%d\n", a[i]);
+        printf("%d ", a[i]);
     }
     printf("\n");
 }
@@ -387,6 +387,4 @@ int main() {
 
     // int test[6] = {4, 6, 5, 3, 3, 1};
     // printf("%d\n", pickingNumbers(test, 6));
-
-    return 0;
 }

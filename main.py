@@ -78,5 +78,20 @@ def pageCount(n, p):
     return count
 
 
-# print(kangaroo(0, 2, 5, 3))
-# print(birthday([1, 2, 1, 3, 2], 3, 2))
+# Your job is to change the string s using a non-negative integer n.
+# Each bit in n will specify whether or not to swap the case for each alphabetic character in s. When you get to the last bit of n, circle back to the first bit. If the bit is 1, swap the case. If its 0, don't swap the case.
+# You should skip the checking of bit when a non-alphabetic character is encountered, but they should be preserved in their original positions.
+def swap(s,n):
+    j = 2
+    str_bin = str(bin(n))
+    for (i, c) in enumerate(s):
+        if c.isalpha():
+            if str_bin[j] == '1':
+                s = s[:i] + c.swapcase() + s[i + 1:]
+            j += 1
+            if j == len(str_bin):
+                j = 2
+
+    return s
+
+swap('Hello world!', 11) # 'heLLO wORLd!'
